@@ -1,0 +1,23 @@
+{
+  "name": "webwaka-core-feature-flags",
+  "version": "0.0.0",
+  "description": "Pricing & Entitlements - Feature flag management",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "echo \"No tests configured yet\" && exit 0",
+    "lint": "tsc --noEmit"
+  },
+  "keywords": [
+    "webwaka",
+    "feature-flags",
+    "core"
+  ],
+  "author": "WebWaka Team",
+  "license": "TBD",
+  "devDependencies": {
+    "typescript": "^5.3.0"
+  }
+}
