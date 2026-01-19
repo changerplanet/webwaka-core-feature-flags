@@ -1,23 +1,32 @@
 {
   "name": "webwaka-core-feature-flags",
   "version": "0.0.0",
-  "description": "Pricing & Entitlements - Feature flag management",
+  "description": "Core Feature Flags & Experiments engine for WebWaka",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
-    "test": "echo \"No tests configured yet\" && exit 0",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
     "lint": "tsc --noEmit"
   },
   "keywords": [
     "webwaka",
     "feature-flags",
+    "experiments",
     "core"
   ],
   "author": "WebWaka Team",
   "license": "TBD",
+  "dependencies": {
+    "@types/node": "^25.0.9",
+    "zod": "^4.3.5"
+  },
   "devDependencies": {
-    "typescript": "^5.3.0"
+    "@vitest/coverage-v8": "^4.0.17",
+    "typescript": "^5.3.0",
+    "vitest": "^4.0.17"
   }
 }

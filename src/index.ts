@@ -1,18 +1,12 @@
-export interface FeatureFlag {
-  id: string;
-  name: string;
-  description?: string;
-  enabled: boolean;
-  tenantId: string;
-  createdAt: Date;
-  updatedAt: Date;
-}
+export * from './models';
+export * from './errors';
+export * from './hash';
+export { checkFeature } from './feature-engine';
+export { assignExperimentVariant } from './experiment-engine';
+export {
+  generateFeatureSnapshot,
+  verifySnapshot,
+  evaluateFromSnapshot
+} from './snapshot';
 
-export interface FeatureFlagService {
-  getFlag(tenantId: string, flagId: string): Promise<FeatureFlag | null>;
-  getAllFlags(tenantId: string): Promise<FeatureFlag[]>;
-  isEnabled(tenantId: string, flagId: string): Promise<boolean>;
-  setEnabled(tenantId: string, flagId: string, enabled: boolean): Promise<void>;
-}
-
-export const VERSION = "0.0.0";
+export const VERSION = '0.0.0';

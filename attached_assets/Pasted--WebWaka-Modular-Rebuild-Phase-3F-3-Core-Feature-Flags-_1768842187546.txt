@@ -1,0 +1,243 @@
+
+WebWaka Modular Rebuild
+
+Phase 3F-3 — Core Feature Flags & Experiments Implementation
+
+⸻
+
+CONTEXT (READ CAREFULLY)
+
+You are implementing Phase 3F-3 of the WebWaka Modular Rebuild.
+
+This task is governed by the WebWaka Ecosystem Constitution (v1.3.1+) and the LOCKED Phase 3F-2 Formal Specification.
+
+This is a core, headless TypeScript library.
+
+🚫 DO NOT build UI
+🚫 DO NOT add persistence
+🚫 DO NOT add analytics or tracking
+🚫 DO NOT add background jobs
+🚫 DO NOT add dashboards
+🚫 DO NOT integrate external services
+
+Your responsibility is to implement the pure, deterministic Feature Flags & Experiments engine exactly as specified.
+
+⸻
+
+SOURCE OF TRUTH
+
+GitHub Repo (already exists):
+https://github.com/changerplanet/webwaka-core-feature-flags
+
+Work directly on main branch
+Branch protection is disabled
+You MAY push directly to main
+
+Registry exists and will validate your manifest.
+
+⸻
+
+TECH STACK (LOCKED)
+	•	Language: TypeScript
+	•	Runtime: Library only (no server)
+	•	Validation: Zod
+	•	Hashing: SHA-256
+	•	Tests: Vitest or Jest
+	•	Coverage requirement: ≥80%
+
+⸻
+
+OBJECTIVE
+
+Implement the Core Feature Flags & Experiments engine with:
+	•	Deterministic feature gating
+	•	Deterministic experiment bucketing
+	•	Full precedence enforcement
+	•	Offline-safe snapshots
+	•	Snapshot integrity verification
+	•	Strict tenant isolation
+
+⸻
+
+IMPLEMENTATION SCOPE (EXACT)
+
+1️⃣ DOMAIN MODELS (Zod-validated)
+
+You MUST implement:
+	•	FeatureFlagDefinition
+	•	FeatureRule
+	•	ExperimentDefinition
+	•	EvaluationContext
+	•	FeatureSnapshot
+	•	ExperimentAssignment
+
+All models must:
+	•	Be immutable by design
+	•	Reject invalid time windows
+	•	Enforce tenantId presence
+
+⸻
+
+2️⃣ PRECEDENCE HIERARCHY (NON-NEGOTIABLE)
+
+Evaluation MUST respect this exact order:
+	1.	Individual overrides
+	2.	Group overrides
+	3.	Tenant-level rules
+	4.	Partner-level rules
+	5.	Plan-level rules
+	6.	System defaults
+
+➡️ First matching rule wins
+➡️ Lower layers MUST NOT override higher layers
+
+⸻
+
+3️⃣ FEATURE FLAG EVALUATION ENGINE
+
+Implement:
+
+checkFeature(
+  featureId: string,
+  context: EvaluationContext,
+  rules: FeatureRule[]
+): FeatureEvaluationResult
+
+Rules:
+	•	Deterministic
+	•	Explainable (must return reason + source)
+	•	Time-aware
+	•	Tenant-isolated
+
+⸻
+
+4️⃣ EXPERIMENT BUCKETING (LOCKED ALGORITHM)
+
+Variant assignment MUST be computed as:
+
+hash = SHA256(experimentId + subjectId + tenantId + salt)
+bucket = hash % 100
+
+Mapping MUST respect trafficAllocation percentages.
+
+❌ No randomness
+❌ No time dependency
+❌ No environment dependency
+
+Same inputs → same variant ALWAYS.
+
+⸻
+
+5️⃣ SNAPSHOT SYSTEM (MANDATORY)
+
+Implement:
+
+generateFeatureSnapshot(context, rules, experiments)
+verifySnapshot(snapshot)
+evaluateFromSnapshot(featureId, snapshot, now)
+
+Snapshot MUST:
+	•	Be offline-safe
+	•	Include checksum (SHA-256 canonical JSON)
+	•	Detect tampering
+	•	Respect expiry
+	•	Be deterministic
+
+⸻
+
+6️⃣ TENANT ISOLATION (HARD RULE)
+	•	All APIs REQUIRE tenantId
+	•	Cross-tenant evaluation MUST throw
+	•	Snapshots MUST embed tenant hash
+	•	No silent fallbacks
+
+⸻
+
+7️⃣ PUBLIC APIs (REQUIRED)
+
+You MUST expose exactly:
+
+checkFeature()
+assignExperimentVariant()
+generateFeatureSnapshot()
+verifySnapshot()
+evaluateFromSnapshot()
+
+
+⸻
+
+8️⃣ CAPABILITIES REGISTRATION
+
+Update module.manifest.json to include:
+
+[
+  "feature:check",
+  "experiment:assign",
+  "feature:snapshot.generate",
+  "feature:snapshot.verify",
+  "experiment:snapshot.evaluate"
+]
+
+
+⸻
+
+HARD STOP CONDITION (MANDATORY TEST)
+
+You MUST include a test that proves:
+
+A Suite can evaluate a feature flag or experiment online or offline, for a given subject and tenant, and receive a deterministic, explainable, verifiable result, respecting precedence, time bounds, and tenant isolation.
+
+If this test is missing → ❌ phase NOT complete.
+
+⸻
+
+TESTING REQUIREMENTS
+	•	≥80% coverage
+	•	Determinism proven by repeated evaluation (≥10x)
+	•	Explicit tests for:
+	•	Precedence order
+	•	Tenant isolation
+	•	Snapshot integrity
+	•	Expired rules exclusion
+	•	Bucketing stability
+
+⸻
+
+EXPLICIT EXCLUSIONS (DO NOT IMPLEMENT)
+
+❌ Analytics
+❌ Tracking
+❌ Metrics
+❌ Persistence
+❌ UI
+❌ Dashboards
+❌ Background jobs
+❌ External APIs
+
+⸻
+
+FINAL DELIVERABLE
+
+When complete, provide:
+	1.	Completion Summary
+	2.	List of APIs implemented
+	3.	Test coverage metrics
+	4.	Hard Stop proof explanation
+	5.	Final commit SHA
+
+Then:
+
+⛔ STOP
+⛔ Await explicit authorization before proceeding further
+
+⸻
+
+ACKNOWLEDGEMENT REQUIRED
+
+Reply first with:
+
+“I acknowledge and will implement Phase 3F-3 exactly as specified.”
+
+Then begin implementation.
+
+⸻
