@@ -3,11 +3,17 @@
   "version": "0.0.0",
   "class": "core",
   "name": "Feature Flags Core",
-  "description": "Pricing & Entitlements - Feature flag management",
+  "description": "Core Feature Flags & Experiments engine - Deterministic feature gating and experiment bucketing",
   "repository": "https://github.com/changerplanet/webwaka-core-feature-flags",
   "author": "WebWaka Team",
   "license": "TBD",
-  "capabilities": [],
+  "capabilities": [
+    "feature:check",
+    "experiment:assign",
+    "feature:snapshot.generate",
+    "feature:snapshot.verify",
+    "experiment:snapshot.evaluate"
+  ],
   "dependencies": [],
   "exports": {
     "types": "./dist/index.d.ts",
