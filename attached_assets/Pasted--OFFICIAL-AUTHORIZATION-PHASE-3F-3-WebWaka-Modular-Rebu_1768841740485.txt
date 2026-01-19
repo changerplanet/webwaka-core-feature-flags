@@ -1,0 +1,103 @@
+
+✅ OFFICIAL AUTHORIZATION — PHASE 3F-3
+
+WebWaka Modular Rebuild
+
+Phase: 3F-3
+Core: Feature Flags & Experiments
+Repository: webwaka-core-feature-flags
+Status: AUTHORIZED TO IMPLEMENT
+
+⸻
+
+AUTHORIZATION STATEMENT
+
+You are hereby explicitly authorized to proceed with:
+
+Phase 3F-3 — Core Feature Flags & Experiments Implementation
+
+This authorization is granted based on:
+	•	Approved Phase 3F-1 OSS Evaluation
+	•	Approved Phase 3F-2 Formal Specification (LOCKED)
+	•	Alignment with the WebWaka Ecosystem Constitution v1.3.1 (Ratified)
+
+⸻
+
+IMPLEMENTATION SCOPE (STRICT)
+
+You MUST implement exactly and only what is defined in Phase 3F-2 Specification, including:
+
+✅ Core Deliverables
+	•	Pure, deterministic feature flag evaluation engine
+	•	Deterministic experiment assignment engine
+	•	SHA-256–based hashing and bucketing
+	•	Snapshot generation, verification, and evaluation
+	•	Strict tenant isolation
+	•	Time-bound rule enforcement
+	•	Precedence hierarchy enforcement
+	•	Capability registration in module.manifest.json
+
+✅ Required APIs
+	•	checkFeature()
+	•	assignExperimentVariant()
+	•	generateFeatureSnapshot()
+	•	verifySnapshot()
+	•	evaluateFromSnapshot()
+
+✅ Required Guarantees
+	•	Determinism (same input → same output, proven via tests)
+	•	Offline-safe evaluation via snapshots
+	•	No cross-tenant leakage (hard error if attempted)
+	•	≥80% test coverage
+	•	Explicit Hard Stop proof test
+
+⸻
+
+🚫 EXPLICITLY FORBIDDEN
+
+You MUST NOT:
+	•	Add UI or dashboards
+	•	Add persistence or databases
+	•	Add analytics, tracking, or telemetry
+	•	Call external services or SDKs
+	•	Implement pricing, incentives, or entitlements logic
+	•	Introduce feature toggles outside the spec
+	•	Drift from the locked precedence hierarchy
+
+⸻
+
+TECHNICAL CONSTRAINTS
+	•	Language: TypeScript only
+	•	Architecture: Headless library
+	•	Side Effects: NONE
+	•	I/O: NONE
+	•	Hashing: SHA-256 only
+	•	Environment: Library-safe (no Node globals required at runtime)
+
+⸻
+
+HARD STOP CONDITION (MANDATORY)
+
+You MUST include a test that proves:
+
+A Suite can evaluate a feature flag or experiment online or offline, for a given subject and tenant, and receive a deterministic, explainable, verifiable result, respecting precedence, time bounds, and tenant isolation.
+
+If this is not proven in tests, the phase is NOT COMPLETE.
+
+⸻
+
+DELIVERABLE AT COMPLETION
+
+Upon completion, submit a Phase 3F-3 Completion Report containing:
+	1.	Summary of implemented APIs
+	2.	Invariants enforced
+	3.	Capability list
+	4.	Test coverage metrics
+	5.	Hard Stop proof reference (test name + description)
+	6.	Final commit SHA
+
+Then:
+
+⛔ STOP
+⛔ Do NOT proceed to any other phase
+⛔ Await explicit authorization
