@@ -1,0 +1,221 @@
+
+🔓 PHASE 3F-3 — CORE FEATURE FLAGS & EXPERIMENTS
+
+IMPLEMENTATION PROMPT (AUTHORITATIVE)
+
+⸻
+
+CONTEXT (READ CAREFULLY)
+
+You are executing Phase 3F-3 of the WebWaka Modular Rebuild.
+
+This phase is IMPLEMENTATION, not research, not specification, not UI.
+
+You are implementing the Core Feature Flags & Experiments engine as a pure, headless, deterministic core library.
+
+⸻
+
+🔐 NON-NEGOTIABLE BINDINGS (MUST BE STATED AND FOLLOWED)
+
+✅ Repository (IMMUTABLE)
+
+You MUST work only in the following repository:
+
+changerplanet/webwaka-core-feature-flags
+
+	•	Branch: main
+	•	Visibility: public
+	•	Governance files already exist
+	•	Vercel is already configured (do not modify infra)
+
+🚫 If this repository does not exist or cannot be cloned cleanly, STOP IMMEDIATELY and report.
+
+⸻
+
+✅ Coding / Execution Platform (IMMUTABLE)
+
+You MUST implement this phase using:
+
+Replit
+
+	•	First action: clone the repo exactly as-is
+	•	If the repo is empty:
+	•	Clone it without adding anything
+	•	If Replit auto-adds placeholders, DELETE them before starting
+	•	Do NOT scaffold frameworks
+	•	Do NOT add runtime servers
+	•	Do NOT add UI code
+
+⸻
+
+🚫 SCOPE BOUNDARIES (STRICT)
+
+You must NOT implement:
+	•	❌ UI components
+	•	❌ Dashboards
+	•	❌ Databases or persistence
+	•	❌ Network calls
+	•	❌ Background jobs
+	•	❌ Feature rollout UIs
+	•	❌ Admin tools
+	•	❌ SDKs or CLIs
+
+This is a pure evaluation engine only.
+
+⸻
+
+🎯 OBJECTIVE
+
+Implement a deterministic Feature Flag & Experiment evaluation engine that can be used by:
+	•	Super Admin dashboards
+	•	Partner dashboards
+	•	Tenant dashboards
+	•	Any Suite (POS, SVM, MVM, etc.)
+	•	Offline contexts (via snapshots)
+
+⸻
+
+📦 REQUIRED OUTPUT (WHAT TO BUILD)
+
+1️⃣ Domain Models (Zod-validated, immutable)
+
+You MUST define:
+	•	FeatureDefinition
+	•	FeatureRule
+	•	ExperimentDefinition
+	•	ExperimentVariant
+	•	EvaluationContext
+	•	FeatureEvaluationResult
+	•	ExperimentAssignment
+	•	FeatureSnapshot
+
+All models must be:
+	•	JSON-serializable
+	•	Deeply immutable (freeze outputs)
+	•	Deterministic
+
+⸻
+
+2️⃣ Precedence Hierarchy (LOCKED)
+
+You MUST enforce the following precedence order exactly:
+	1.	Individual overrides
+	2.	Group overrides
+	3.	Tenant rules
+	4.	Partner rules
+	5.	Plan rules
+	6.	System defaults
+
+Higher levels always override lower ones.
+
+⸻
+
+3️⃣ Core APIs (MANDATORY)
+
+Implement exactly the following APIs:
+
+checkFeature(
+  featureId,
+  context,
+  rules
+): FeatureEvaluationResult
+
+assignExperimentVariant(
+  experiment,
+  context
+): ExperimentAssignment
+
+generateFeatureSnapshot(
+  context,
+  features,
+  experiments,
+  options?
+): FeatureSnapshot
+
+verifySnapshot(snapshot): boolean
+
+evaluateFromSnapshot(
+  featureId,
+  snapshot,
+  evaluationTime,
+  expectedTenantId?
+): FeatureEvaluationResult
+
+
+⸻
+
+4️⃣ Determinism & Integrity (CRITICAL)
+
+You MUST prove:
+	•	Same input → same output (10× repeated tests)
+	•	No use of Date.now(), Math.random(), or system entropy
+	•	Experiment bucketing uses SHA-256 hashing
+	•	Snapshot integrity via checksum verification
+	•	Tampering is detectable
+
+⸻
+
+5️⃣ Tenant Isolation (MANDATORY)
+	•	Every evaluation MUST be tenant-scoped
+	•	Cross-tenant access MUST throw an explicit error
+	•	Snapshot evaluation MUST require expectedTenantId
+
+⸻
+
+6️⃣ Tests (HARD REQUIREMENTS)
+
+You MUST include tests that prove:
+	•	Precedence correctness
+	•	Determinism (10× repeat)
+	•	Experiment bucketing stability
+	•	Snapshot generation & verification
+	•	Offline vs online parity
+	•	Tenant isolation enforcement
+	•	JSON round-trip serialization
+
+📊 Minimum coverage: ≥ 80%
+
+⸻
+
+7️⃣ Module Registration
+
+Update module.manifest.json to register capabilities such as:
+
+[
+  "feature:check",
+  "experiment:assign",
+  "feature:snapshot.generate",
+  "feature:snapshot.verify",
+  "experiment:snapshot.evaluate"
+]
+
+
+⸻
+
+🧱 ARCHITECTURAL INVARIANTS (MUST HOLD)
+	•	Pure functions only
+	•	No side effects
+	•	No hidden state
+	•	No time dependence
+	•	No coupling to pricing, incentives, payments, or subscriptions
+
+⸻
+
+⛔ HARD STOP
+
+After completing implementation:
+
+⛔ STOP
+⛔ Do NOT proceed to Phase 4
+⛔ Do NOT add enhancements
+⛔ Await explicit authorization
+
+⸻
+
+✅ ACKNOWLEDGEMENT FORMAT (REQUIRED)
+
+Reply only with:
+
+“Phase 3F-3 acknowledged. Proceeding on Replit using repository changerplanet/webwaka-core-feature-flags exactly as instructed.”
+
+Then execute.
