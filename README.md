@@ -2,6 +2,15 @@
 
 **Pricing & Entitlements - Feature flag management**
 
+## Installation
+
+```bash
+npm install @webwaka/core-feature-flags
+```
+
+**Note**: This package is published to npm registry. GitHub-based installs are no longer supported.
+
+
 ## Overview
 
 This repository is part of the WebWaka Core Substrate. It provides shared services for the WebWaka platform.
