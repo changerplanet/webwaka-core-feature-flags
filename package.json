@@ -1,5 +1,5 @@
 {
-  "name": "webwaka-core-feature-flags",
+  "name": "@webwaka/core-feature-flags",
   "version": "0.0.0",
   "description": "Core Feature Flags & Experiments engine for WebWaka",
   "main": "./dist/index.js",
@@ -28,5 +28,8 @@
     "@vitest/coverage-v8": "^4.0.17",
     "typescript": "^5.3.0",
     "vitest": "^4.0.17"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
