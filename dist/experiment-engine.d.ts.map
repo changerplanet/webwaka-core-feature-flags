@@ -1,0 +1,1 @@
+{"version":3,"file":"experiment-engine.d.ts","sourceRoot":"","sources":["../src/experiment-engine.ts"],"names":[],"mappings":"AAAA,OAAO,EACL,oBAAoB,EACpB,iBAAiB,EACjB,oBAAoB,EAErB,MAAM,UAAU,CAAC;AAgClB,wBAAgB,uBAAuB,CACrC,UAAU,EAAE,oBAAoB,EAChC,OAAO,EAAE,iBAAiB,GACzB,oBAAoB,CA0CtB"}
